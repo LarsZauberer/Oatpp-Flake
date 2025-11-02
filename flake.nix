@@ -65,7 +65,6 @@
 
         cmakeFlags = [
           "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-          "-DOATPP_BUILD_TESTS=OFF"
         ];
 
         postInstall = postInstallFix "oatpp-swagger";
