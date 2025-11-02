@@ -69,6 +69,26 @@
 
         postInstall = postInstallFix "oatpp-swagger";
       };
+      packages.postgresql = pkgs.stdenv.mkDerivation {
+        pname = "oatpp-postgresql";
+        version = "1.3.0-latest";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "oatpp";
+          repo = "oatpp-postgresql";
+          tag = "1.3.0-latest";
+
+          hash = "sha256-rLj2f2uz7S5aP7EJe/6bLFE1jedkqq5dlr6g737H0Io=";
+        };
+
+        nativeBuildInputs = buildInputs ++ [pkgs.postgresql self.packages.${system}.oatpp];
+
+        cmakeFlags = [
+          "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+        ];
+
+        postInstall = postInstallFix "oatpp-postgresql";
+      };
       devShells.default = pkgs.mkShell {
         name = "devShell";
 
